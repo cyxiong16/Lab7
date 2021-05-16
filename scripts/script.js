@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Make changes if not already on home page
       if(window.location.hash != "") {
-        window.history.pushState({page_id: 0}, "", window.location.origin);
+        window.history.pushState({page_id: 0}, "", window.location.origin + "/Lab7/");
         setState();
       }
     });
