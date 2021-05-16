@@ -5,7 +5,7 @@ export const router = {};
 /**
  * Changes the "page" (state) that your SPA app is currently set to
  */
-router.setState = function() {
+router.setState = function(entry) {
   /**
    * - There are three states that your SPA app will have
    *    1. The home page
@@ -35,4 +35,51 @@ router.setState = function() {
    *    1. You may add as many helper functions in this file as you like
    *    2. You may modify the parameters of setState() as much as you like
    */
+
+   // Set state to home page
+   if(window.location.hash == "") {
+    document.querySelector('body').setAttribute("class", "");
+    document.querySelector('h1').innerText = "Journal Entries";
+   }
+
+   // Set state to settings page
+   else if(window.location.hash == "#settings") {
+     document.querySelector('body').setAttribute("class", "settings");
+     document.querySelector('h1').innerText = "Settings";
+   }
+
+   // Set state to entry's page
+   else {
+     let entryNum = router.findEntryNum(entry);
+
+     document.querySelector('body').setAttribute("class", "single-entry");
+     document.querySelector('h1').innerText = "Entry " + entryNum;
+
+     // Remove entry and create new one
+     document.querySelector('entry-page').remove();
+     let newEntry = document.createElement('entry-page');
+     document.querySelector('body').appendChild(newEntry);
+     document.querySelector('entry-page').entry = entry;
+   }
+}
+
+/**
+ * Helper function to find entry number
+ * @param {*} entry current entry whose number needs to be found
+ */
+router.findEntryNum = function(entry) {
+
+  // Get all entry posts
+  let entries = document.querySelector('main').children;
+  let entryNum;
+
+  for(let i = 0; i < 10; i++) {
+
+    // Check which entry it is, based on entry's title
+    if(entries[i].entry.title == entry.title) {
+      entryNum = i + 1;
+      break;
+    }
+  }
+  return entryNum;
 }
