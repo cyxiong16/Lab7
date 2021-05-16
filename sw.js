@@ -7,15 +7,7 @@
 
 var CACHE_NAME = 'my-site-cache-v1';
 var urlsToCache = [
-    'https://cse110lab6.herokuapp.com/entries/',
-    '/Lab7/',
-    '/Lab7/style.css',
-    '/Lab7/scripts/script.js',
-    '/Lab7/scripts/router.js',
-    '/Lab7/index.html',
-    '/Lab7/components/entry-page.js',
-    '/Lab7/components/journal-entry.js',
-    '/Lab7/settings.svg'
+    'https://cse110lab6.herokuapp.com/entries/'
 ];
 
 self.addEventListener('install', function(event) {
@@ -44,7 +36,7 @@ self.addEventListener('fetch', function(event) {
               if(!response || response.status !== 200 || response.type !== 'basic') {
                 return response;
               }
-              
+
               var responseToCache = response.clone();
   
               caches.open(CACHE_NAME)
